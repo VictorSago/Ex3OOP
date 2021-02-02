@@ -9,6 +9,8 @@ namespace VicsEx3
         private int age;
         private double height;
         private double weight;
+        
+        // The age of the person should follow the name, not precede it
         public Person(string fName, string lName, int age)
         {
             Age = age;
@@ -34,7 +36,7 @@ namespace VicsEx3
             {
                 if (value.Length < 2 || value.Length > 10)
                 {
-                    throw new ArgumentException($"{nameof(value)} must be between 2 and 10 characters long.");
+                    throw new ArgumentException($"FName {nameof(value)} must be between 2 and 10 characters long.");
                 }
                 fName = value;
             }
@@ -46,7 +48,7 @@ namespace VicsEx3
             {
                 if (value.Length < 3 || value.Length > 15)
                 {
-                    throw new ArgumentException($"{nameof(value)} must be between 3 and 15 characters long.");
+                    throw new ArgumentException($"LName {nameof(value)} must be between 3 and 15 characters long.");
                 }
                 lName = value;
             }
@@ -59,7 +61,7 @@ namespace VicsEx3
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException($"{nameof(value)} must be greater than 0.");
+                    throw new ArgumentException($"Age {nameof(value)} must be greater than 0.");
                 }
                 age = value;
             } 
@@ -70,7 +72,7 @@ namespace VicsEx3
 
         public override string ToString()
         {
-            return $"First Name = {FName}, Last Name = {LName}, Age = {Age}, Height = {Height}, Weight = {Weight};";
+            return $"First Name = {FName}, Last Name = {LName}, Age = {Age} years, Height = {Height} cm, Weight = {Weight} kg;";
         }
     }
 }
