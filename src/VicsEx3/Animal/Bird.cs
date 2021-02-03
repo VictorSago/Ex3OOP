@@ -14,7 +14,13 @@ namespace VicsEx3
 
         public override void DoSound()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Tweet-tweet! Chirp-chirp!");
+            
+        }
+
+        public override string Stats()
+        {
+            return $"{base.Stats()}, Wing span: {WingSpan} cm";
         }
 
     }

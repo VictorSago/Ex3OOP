@@ -1,11 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace VicsEx3
 {
+    /* 3.2.13 F: Om vi under utvecklingen kommer fram till att samtliga fåglar behöver ett nytt attribut, 
+     * i vilken klass bör vi lägga det?
+     * S: Det bör läggas i klassen `Bird`, förstås.
+     * 3.2.14 F: Om alla djur behöver det nya attributet, vart skulle man lägga det då?
+     * S: I klassen `Animal`, så klart!
+     * 3.3.9 F: Försök att lägga till en häst i listan av hundar. Varför fungerar inte det?
+     * S: Listan deklarerad som `List<Dog>` kan bara lagra objekt av klassen `Dog` eller dess subklasser,
+     * medan `Horse` är inte en subklass av `Dog`.
+     * 3.3.10 F: Vilken typ måste listan vara för att alla klasser skall kunna lagras tillsammans?
+     * S: Alla klassers gemensamma superklass -- deras "förälder". Så, i vårt fall, om vi ska lagra alla
+     * djurtyper i den, så måste listan vara av typen `List<Animal>`. Men om vi ska kunna lagra alla klasser
+     * så måste listan vara deklarerad som `Object`-listan, eftersom `Object` är superklassen till ALLA klasser.
+     * 3.3.13 F: Förklara vad det är som händer.
+     * S: Exekveringsmiljön anropar respektive objektets `Stats()` metod. Om metoden finns överlagrad hos det objektet
+     * som finns under exekveringen, så exekveras den metoden, annars kollar exekveringmiljön i nästa länk upp i
+     * klasshierarkin till den hittar definitionen av metoden och kör den. I vårt fall överlagrar varje subklass i
+     * hierarkin `Stats()` metoden, så det är den som exekveras.
+     * 3.3.17 F: Varför inte?
+     * S: För att den finns inte för alla `Animal`s -- den finns bara för `Dog`s. Från `Animal` objekt kan vi bara
+     * komma åt metoder i deklarerade i `Animal` klassen eller i dess superklass(er).
+     * 3.4.11 F: Varför är polymorfism viktigt att behärska?
+     * S:
+     * 3.4.12 F: Hur kan polymorfism förändra och förbättra kod via en bra struktur?
+     * S:
+     * 3.4.13 F: Vad är det för en skillnad på en Abstrakt klass och ett Interface?
+     * S:
+     * De här frågorna och svaren kunde ha lagts i filen README.md eller i sin egen lilla textfil.
+     */
     class Program
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("========Persons:================================");
+
             // CreatePersons();
             var ph = new PersonHandler();
             var p1 = ph.CreatePerson("Zaphod", "Beeblebrox", 120, 210, 100);
@@ -18,7 +50,48 @@ namespace VicsEx3
             Console.WriteLine($"P3: {ph.Describe(p3)}");
             Console.WriteLine($"P4: {ph.Describe(p4)}");
             Console.WriteLine($"P5: {ph.Describe(p5)}");
+
+            Console.WriteLine("========End Persons=============================\n");
+
+            Console.WriteLine("========Animal list:============================");
+
+            var animalList = new List<Animal>();
+            PopulateAnimals(animalList);
+            foreach (var a in animalList)
+            {
+                Console.WriteLine($"{a.Name} ({a.GetType().Name})");
+                if (a is IPerson)
+                {
+                    Console.Write(" -- ");
+                    ((IPerson)a).Talk();
+                }
+                Console.Write("        ");
+                a.DoSound();
+            }
             
+            Console.WriteLine("========End Animal list=========================\n");
+
+            var doglist = new List<Dog>();
+            PopulateDogs(doglist);
+
+            Console.WriteLine("========Animal stats:===========================");
+
+            foreach (var a in animalList)
+            {
+                Console.WriteLine($"{a.Stats()}");
+            }
+
+            Console.WriteLine("========End Animal stats========================\n");
+
+            Console.WriteLine("====Stats & unique for only Dogs in Animal list:");
+
+            foreach (var dog in animalList.OfType<Dog>().ToList())
+            {
+                Console.WriteLine($"{dog.Stats()}, {dog.Unique()}");
+            }
+            
+            Console.WriteLine("==End Stats+unique for only Dogs in Animal list=\n");
+
         }
 
         private static void CreatePersons()
@@ -82,6 +155,34 @@ namespace VicsEx3
             {
                 Console.WriteLine("Person p6 inte skapades: " + ex.Message);
             }
+        }
+    
+        private static void PopulateAnimals(List<Animal> ls)
+        {
+            ls.Add(new Bird("Jonathan Livingston", 9, 2.5f, 70.0f));
+            ls.Add(new Dog("Argos", 20, 60f, "Hunting dog"));
+            ls.Add(new Hedgehog("Sonic", 4, 2.1f, 10000));
+            ls.Add(new Horse("Sleipnir", 500, 2000f, 300));
+            ls.Add(new Wolf("Akela", 12, 30.2f, "white"));
+            ls.Add(new Worm("Sisi", 1, 0.2f, true));
+            var flamingo = new Flamingo("Ruby", 18, 5.5f, 150f);
+            flamingo.LegLength = 120;
+            ls.Add(flamingo);
+            var pelican = new Pelican("Petra", 26, 15.0f, 302f);
+            pelican.BeekVolume = 750;
+            ls.Add(pelican);
+            ls.Add(new Wolfman("Larry Talbot", 35, 85f, "black"));
+            var swan = new Swan("Odette", 19, 10f, 2.5f);
+            swan.NeckLength = 90;
+            ls.Add(swan);
+        }
+
+        private static void PopulateDogs(List<Dog> dl)
+        {
+            dl.Add(new Dog("Cerberus", 10000, 1000f, "Hellhound"));
+            dl.Add(new Dog("White Fang", 4, 38f, "Wolfhound"));
+            dl.Add(new Dog("Sharvara", 1000000, 120, "Ancient dog"));
+            dl.Add(new Dog("Laelaps", 20, 30f, "Supreme Hunter"));
         }
     }
 }

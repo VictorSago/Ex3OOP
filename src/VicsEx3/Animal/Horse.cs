@@ -14,7 +14,12 @@ namespace VicsEx3
 
         public override void DoSound()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Neigh, neigh!");
+        }
+
+        public override string Stats()
+        {
+            return $"{base.Stats()}, Height: {Height} cm";
         }
     }
 }

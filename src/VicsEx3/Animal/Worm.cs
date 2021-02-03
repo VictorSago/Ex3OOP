@@ -14,7 +14,12 @@ namespace VicsEx3
 
         public override void DoSound()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Sssss...");
+        }
+
+        public override string Stats()
+        {
+            return $"{base.Stats()}, Is poisonous: {IsPoisonous}";
         }
     }
 }

@@ -14,7 +14,17 @@ namespace VicsEx3
 
         public override void DoSound()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Woof, woof!");
+        }
+
+        public override string Stats()
+        {
+            return $"{base.Stats()}, Breed: {Breed}";
+        }
+
+        public string Unique()
+        {
+            return $"Hash:{this.GetHashCode().ToString()}";
         }
     }
 }
