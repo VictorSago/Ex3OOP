@@ -25,13 +25,27 @@ namespace VicsEx3
      * S: För att den finns inte för alla `Animal`s -- den finns bara för `Dog`s. Från `Animal` objekt kan vi bara
      * komma åt metoder i deklarerade i `Animal` klassen eller i dess superklass(er).
      * 3.4.11 F: Varför är polymorfism viktigt att behärska?
-     * S:
+     * S: Det tillåter att behandla objekt av olika besläktade  klasser som om de vore av samma klass. Det gör att 
+     * koden blir mer dynamisk: samma kod på ett ställe kan leda till olika beteenden beroende på den konkreta 
+     * implementationen. Med andra ord, ett och samma variabel kan ha olika "former" -- därav ordet polymorfism.
      * 3.4.12 F: Hur kan polymorfism förändra och förbättra kod via en bra struktur?
-     * S:
+     * S: Koden blir mer flexibel, eftersom man oftast inte behöver ändra det på olika ställen. Koden blir också mer 
+     * läsbar, eftersom man då inte behöver ta hänsyn till vad det är för objekt i varje stund och ha separat 
+     * typberoende kod.
      * 3.4.13 F: Vad är det för en skillnad på en Abstrakt klass och ett Interface?
-     * S:
+     * S: I princip, så handlar det om att en abstrakt klass bestämmer de ärvande klassernas inre struktur, medan ett
+     * interface bestämmer den implementerande klassens "yttre ansikte", så att säga. I praktiken, en abstrakt klass är
+     * en klass som inte instansieras, men agerar istället som en basklass för andra klasser, medan ett interface är 
+     * inte en klass, utan snarare ett slags "kontrakt" för en klass. Med en abstrakt klass metoder kan vara 
+     * implementerade och antingen ärvas då som de är eller överridas. I ett interface metoder är inte implementerade 
+     * utan visar bara en metodsignatur, och alla klasser som implementerar interfacet måste implementera alla metoder
+     * (detta kommer att ändras i framtiden när man inför s.k. "default methods").
+     * En annan mycket viktig skillnad är att en klass kan bara ärva frå en basklass, men den kan implementera många
+     * olika interface.
+     *
      * De här frågorna och svaren kunde ha lagts i filen README.md eller i sin egen lilla textfil.
      */
+     
     class Program
     {
         static void Main(string[] args)

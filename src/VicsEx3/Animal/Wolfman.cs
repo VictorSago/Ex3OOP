@@ -10,7 +10,7 @@ namespace VicsEx3
 
         public void Talk()
         {
-            Console.WriteLine($"My name is {Name}.");
+            Console.WriteLine($"My name is {Name.Split()[0]}, and I have a problem. :(");
         }
     }
 }

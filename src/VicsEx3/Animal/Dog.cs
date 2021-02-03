@@ -24,7 +24,7 @@ namespace VicsEx3
 
         public string Unique()
         {
-            return $"Hash:{this.GetHashCode().ToString()}";
+            return $"Hash:{this.GetHashCode().ToString()}?#@gArbLed!";
         }
     }
 }
