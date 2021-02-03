@@ -92,6 +92,18 @@ namespace VicsEx3
             
             Console.WriteLine("==End Stats+unique for only Dogs in Animal list=\n");
 
+            Console.WriteLine("========User errors:============================");
+
+            var uErrorList = new List<UserError>();
+            PopulateUserErrors(uErrorList);
+
+            foreach(var ue in uErrorList)
+            {
+                Console.WriteLine(ue.UEMessage());
+            }
+
+            Console.WriteLine("========End User errors=========================\n");
+
         }
 
         private static void CreatePersons()
@@ -183,6 +195,22 @@ namespace VicsEx3
             dl.Add(new Dog("White Fang", 4, 38f, "Wolfhound"));
             dl.Add(new Dog("Sharvara", 1000000, 120, "Ancient dog"));
             dl.Add(new Dog("Laelaps", 20, 30f, "Supreme Hunter"));
+        }
+
+        private static void PopulateUserErrors(List<UserError> uel)
+        {
+            uel.Add(new TextInputError());
+            uel.Add(new NumericInputError());
+            uel.Add(new NumericInputError());
+            uel.Add(new TextInputError());
+            uel.Add(new NumericInputError());
+            uel.Add(new TextInputError());
+            uel.Add(new DateInputError());
+            uel.Add(new IntegerInputError());
+            uel.Add(new DateInputError());
+            uel.Add(new NumberRangeInputError());
+            uel.Add(new NumberRangeInputError());
+            uel.Add(new IntegerInputError());
         }
     }
 }
